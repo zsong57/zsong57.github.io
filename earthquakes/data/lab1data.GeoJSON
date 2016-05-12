@@ -1,0 +1,345 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Location": "Manila, Philippines",
+        "From Dec-5-2015 to Dec-14-2015": 16,
+        "From Dec-15-2015 to Dec-24-2015": 5,
+        "From Dec-25-2015 to Jan-04-2016": 11,
+        "From Jan-05-2016 to Jan-14-2016": 5,
+        "From Jan-15-2016 to Jan-24-2016": 15,
+        "From Jan-25-2016 to Feb-04-2016": 17,
+        "From Feb-05-2016 to Feb-14-2016": 13
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.9822172,
+          14.60415895
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Location": "Taipei, China",
+        "From Dec-5-2015 to Dec-14-2015": 6,
+        "From Dec-15-2015 to Dec-24-2015": 7,
+        "From Dec-25-2015 to Jan-04-2016": 6,
+        "From Jan-05-2016 to Jan-14-2016": 8,
+        "From Jan-15-2016 to Jan-24-2016": 17,
+        "From Jan-25-2016 to Feb-04-2016": 17,
+        "From Feb-05-2016 to Feb-14-2016": 12
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5683333,
+          25.03583333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Location": "Kushiro, Japan",
+        "From Dec-5-2015 to Dec-14-2015": 17,
+        "From Dec-15-2015 to Dec-24-2015": 14,
+        "From Dec-25-2015 to Jan-04-2016": 17,
+        "From Jan-05-2016 to Jan-14-2016": 11,
+        "From Jan-15-2016 to Jan-24-2016": 16,
+        "From Jan-25-2016 to Feb-04-2016": 14,
+        "From Feb-05-2016 to Feb-14-2016": 15
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          144.3833,
+          42.9833
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Location": "Port-Vila, Vanuatu",
+        "From Dec-5-2015 to Dec-14-2015": 9,
+        "From Dec-15-2015 to Dec-24-2015": 18,
+        "From Dec-25-2015 to Jan-04-2016": 16,
+        "From Jan-05-2016 to Jan-14-2016": 10,
+        "From Jan-15-2016 to Jan-24-2016": 8,
+        "From Jan-25-2016 to Feb-04-2016": 17,
+        "From Feb-05-2016 to Feb-14-2016": 16
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          168.31,
+          -17.7
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Location": "Seattle, U.S.A",
+        "From Dec-5-2015 to Dec-14-2015": 35,
+        "From Dec-15-2015 to Dec-24-2015": 23,
+        "From Dec-25-2015 to Jan-04-2016": 45,
+        "From Jan-05-2016 to Jan-14-2016": 48,
+        "From Jan-15-2016 to Jan-24-2016": 44,
+        "From Jan-25-2016 to Feb-04-2016": 52,
+        "From Feb-05-2016 to Feb-14-2016": 50
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          238,
+          47.57000205
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Location": "Anchorage, U.S.A",
+        "From Dec-5-2015 to Dec-14-2015": 624,
+        "From Dec-15-2015 to Dec-24-2015": 574,
+        "From Dec-25-2015 to Jan-04-2016": 494,
+        "From Jan-05-2016 to Jan-14-2016": 543,
+        "From Jan-15-2016 to Jan-24-2016": 1014,
+        "From Jan-25-2016 to Feb-04-2016": 1114,
+        "From Feb-05-2016 to Feb-14-2016": 355
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          210.0998,
+          61.21996991
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Location": "Honolulu, U.S.A",
+        "From Dec-5-2015 to Dec-14-2015": 51,
+        "From Dec-15-2015 to Dec-24-2015": 57,
+        "From Dec-25-2015 to Jan-04-2016": 55,
+        "From Jan-05-2016 to Jan-14-2016": 79,
+        "From Jan-15-2016 to Jan-24-2016": 55,
+        "From Jan-25-2016 to Feb-04-2016": 56,
+        "From Feb-05-2016 to Feb-14-2016": 63
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          202.143,
+          21.30687644
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Location": "Los Angles, U.S.A",
+        "From Dec-5-2015 to Dec-14-2015": 339,
+        "From Dec-15-2015 to Dec-24-2015": 317,
+        "From Dec-25-2015 to Jan-04-2016": 368,
+        "From Jan-05-2016 to Jan-14-2016": 405,
+        "From Jan-15-2016 to Jan-24-2016": 351,
+        "From Jan-25-2016 to Feb-04-2016": 367,
+        "From Feb-05-2016 to Feb-14-2016": 324
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          242,
+          34
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Location": "Honiara, Solomon Islands",
+        "From Dec-5-2015 to Dec-14-2015": 9,
+        "From Dec-15-2015 to Dec-24-2015": 9,
+        "From Dec-25-2015 to Jan-04-2016": 6,
+        "From Jan-05-2016 to Jan-14-2016": 8,
+        "From Jan-15-2016 to Jan-24-2016": 17,
+        "From Jan-25-2016 to Feb-04-2016": 16,
+        "From Feb-05-2016 to Feb-14-2016": 10
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          159,
+          -9.4
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Location": "Petropavlovsk-Kamchatsky, Russa",
+        "From Dec-5-2015 to Dec-14-2015": 15,
+        "From Dec-15-2015 to Dec-24-2015": 14,
+        "From Dec-25-2015 to Jan-04-2016": 16,
+        "From Jan-05-2016 to Jan-14-2016": 14,
+        "From Jan-15-2016 to Jan-24-2016": 13,
+        "From Jan-25-2016 to Feb-04-2016": 14,
+        "From Feb-05-2016 to Feb-14-2016": 10
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          158.6230204,
+          53.06199241
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Location": "Guatemala City, Guatemala",
+        "From Dec-5-2015 to Dec-14-2015": 12,
+        "From Dec-15-2015 to Dec-24-2015": 11,
+        "From Dec-25-2015 to Jan-04-2016": 14,
+        "From Jan-05-2016 to Jan-14-2016": 5,
+        "From Jan-15-2016 to Jan-24-2016": 5,
+        "From Jan-25-2016 to Feb-04-2016": 18,
+        "From Feb-05-2016 to Feb-14-2016": 12
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          270,
+          14.621
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Location": "Sueva, Fiji",
+        "From Dec-5-2015 to Dec-14-2015": 24,
+        "From Dec-15-2015 to Dec-24-2015": 15,
+        "From Dec-25-2015 to Jan-04-2016": 12,
+        "From Jan-05-2016 to Jan-14-2016": 20,
+        "From Jan-15-2016 to Jan-24-2016": 9,
+        "From Jan-25-2016 to Feb-04-2016": 11,
+        "From Feb-05-2016 to Feb-14-2016": 12
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          178.4417073,
+          -18.13301593
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Location": "Jayapura,Indonesia",
+        "From Dec-5-2015 to Dec-14-2015": 13,
+        "From Dec-15-2015 to Dec-24-2015": 6,
+        "From Dec-25-2015 to Jan-04-2016": 11,
+        "From Jan-05-2016 to Jan-14-2016": 12,
+        "From Jan-15-2016 to Jan-24-2016": 16,
+        "From Jan-25-2016 to Feb-04-2016": 13,
+        "From Feb-05-2016 to Feb-14-2016": 15
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          140,
+          -2.5
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Location": "Cold Bay, U.S.A",
+        "From Dec-5-2015 to Dec-14-2015": 77,
+        "From Dec-15-2015 to Dec-24-2015": 72,
+        "From Dec-25-2015 to Jan-04-2016": 76,
+        "From Jan-05-2016 to Jan-14-2016": 85,
+        "From Jan-15-2016 to Jan-24-2016": 84,
+        "From Jan-25-2016 to Feb-04-2016": 80,
+        "From Feb-05-2016 to Feb-14-2016": 19
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          198,
+          55
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Location": "Maluku Utara, Indonesia",
+        "From Dec-5-2015 to Dec-14-2015": 114,
+        "From Dec-15-2015 to Dec-24-2015": 26,
+        "From Dec-25-2015 to Jan-04-2016": 13,
+        "From Jan-05-2016 to Jan-14-2016": 40,
+        "From Jan-15-2016 to Jan-24-2016": 20,
+        "From Jan-25-2016 to Feb-04-2016": 19,
+        "From Feb-05-2016 to Feb-14-2016": 14
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.43,
+          0.696377
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Location": "Nukualofa, Tonga",
+        "From Dec-5-2015 to Dec-14-2015": 24,
+        "From Dec-15-2015 to Dec-24-2015": 23,
+        "From Dec-25-2015 to Jan-04-2016": 22,
+        "From Jan-05-2016 to Jan-14-2016": 25,
+        "From Jan-15-2016 to Jan-24-2016": 14,
+        "From Jan-25-2016 to Feb-04-2016": 16,
+        "From Feb-05-2016 to Feb-14-2016": 10
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          185.2,
+          -21.133333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Location": "Osaka, Japan",
+        "From Dec-5-2015 to Dec-14-2015": 13,
+        "From Dec-15-2015 to Dec-24-2015": 9,
+        "From Dec-25-2015 to Jan-04-2016": 10,
+        "From Jan-05-2016 to Jan-14-2016": 11,
+        "From Jan-15-2016 to Jan-24-2016": 10,
+        "From Jan-25-2016 to Feb-04-2016": 18,
+        "From Feb-05-2016 to Feb-14-2016": 12
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.5,
+          34.7
+        ]
+      }
+    }
+  ]
+}
