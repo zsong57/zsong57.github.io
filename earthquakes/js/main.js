@@ -6,13 +6,10 @@ var black   = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-backgr
 	ext: 'png'
 }),
 
-terrain = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
-	type: 'sat',
-	ext: 'jpg',
+terrain =  L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri',
 	minZoom: 2,
 	maxZoom: 5,
-	attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency',
-	subdomains: '1234'
 });
 
 getOverlaydata(map);
