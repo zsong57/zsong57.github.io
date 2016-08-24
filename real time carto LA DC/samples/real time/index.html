@@ -1,456 +1,468 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  <meta name="description" content="Calcite Maps Demo - ArcGIS">
-  <meta name="author" content="">
-  <link rel="icon" href="http://www.esri.com/favicon.ico">
-  <title>Calcite Maps - ArcGIS Sample</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="description" content="Calcite Maps Demo - ArcGIS">
+    <meta name="author" content="">
+    <link rel="icon" href="http://www.freeiconspng.com/uploads/hello-kitty-icon-12.png">
+    <title>Los Angeles Real- Time Bus</title>
 
-  <!-- Calcite Bootstrap -->
-  <link rel="stylesheet" href="../../dist/css/calcite-bootstrap.min-v0.2.css">
+    <!-- Calcite Bootstrap -->
+    <link rel="stylesheet" href="../../dist/css/calcite-bootstrap.min-v0.2.css">
 
-  <!-- Calcite Maps -->
-  <link rel="stylesheet" href="../../dist/css/calcite-maps-arcgis-3.x.min-v0.2.css"-->
+    <!-- Calcite Maps -->
+    <link rel="stylesheet" href="../../dist/css/calcite-maps-arcgis-3.x.min-v0.2.css" -->
 
-  <!-- ArcGIS JS 3.x -->
-  <link rel="stylesheet" href="https://js.arcgis.com/3.16/esri/themes/calcite/dijit/calcite.css">
-  <link rel="stylesheet" href="https://js.arcgis.com/3.16/esri/themes/calcite/esri/esri.css">
-          
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
+    <!-- ArcGIS JS 3.x -->
+    <link rel="stylesheet" href="https://js.arcgis.com/3.16/esri/themes/calcite/dijit/calcite.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.16/esri/themes/calcite/esri/esri.css">
 
-    }
- /*#map {
-            width: 100%;
-            height: 75%;
-            z-index: -1;
-        }*/
-        
-        #controls {
-            position: absolute;
-            bottom: 0px;
-            width: 100%;
-            height: 23%;
-            color:;
-            padding: 10px;
-            white-space: nowrap;
-            background-color: rgb(240,240,240);
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
         }
-
-
-  </style>
-
-  <script type="text/javascript">
-  var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
-      var dojoConfig = {
-        packages: [{
-          name: "bootstrap",
-          //location: "https://esri.github.io/calcite-maps/dist/js/dojo-bootstrap"
-          location: location.pathname.replace(/\/[^/]+$/, "") + "./../../dist/vendor/dojo-bootstrap"
-        },
-        {
-          name: "calcite-maps",
-          //location: "https://esri.github.io/calcite-maps/dist/js/dojo"
-          location: location.pathname.replace(/\/[^/]+$/, "") + "./../../dist/js/dojo"
-        },
-{name: "app",
-                location: package_path + "/js"}
-        ]
-      };
-
-    </script>
-
-
- <script src="https://js.arcgis.com/3.17/"></script>
-    <script>
-        require(["esri/map",
-             "esri/layers/ArcGISDynamicMapServiceLayer", "esri/layers/LayerDrawingOptions", "esri/renderers/SimpleRenderer", "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol", "esri/Color", "esri/layers/ArcGISTiledMapServiceLayer","app/AggregationRenderer", "dojo/dom", "dojo/on", "dojo/domReady!"],
-            function (Map, ArcGISDynamicMapServiceLayer, LayerDrawingOptions, SimpleRenderer, SimpleFillSymbol, SimpleLineSymbol, Color, ArcGISTiledMapServiceLayer,AggregationRenderer, dom, on) {
-
-                //Define global variables
-                var map;
-
-                //#############################################################################################
-                //Map and UI related functions
-                //#############################################################################################
-                //
-                //Map related function
-                //
-                map = new Map("map", {
-                    basemap: "dark-gray",
-                    center: [-118.24, 34.05],
-      zoom: 10
-                });
-
-                //Map event listeners
-                map.on("load", function () {
-                    //addMSLayers();
-                    /*setTimeout(function () {
-                        switchRenderer()
-                    }, 5000)*/
-                });
-
-                //
-                //UI event listener
-                //
-                on(dom.byId("addMS"), "click", addMSLayers);
-                on(dom.byId("applyRenderer"), "click", switchRenderer);
-
-                //#############################################################################################
-                //Layer related functions
-                //#############################################################################################
-                //Add the layer
-                function addMSLayers() {
-                    var url = dojo.byId("inputUrl").value,
-                        options = {
-                            id: "TestMS",
-                            showAttribution: true,
-                            refreshInterval: 0.03333
-                        };
-                    var MSLayer = new ArcGISDynamicMapServiceLayer(url, options);
-                    MSLayer.on("load", function () {
-                        dojo.byId("addMS").setAttribute('disabled', true);
-                    });
-                    MSLayer.on("error", function (err) {
-                        console.log("Error occured loading the " + err.target.id + " layer. Please specify a valid URL");
-                        console.log("Invalid layer URL: " + err.target.url)
-                        dojo.byId("inputUrl").style.backgroundColor = "#ff0000";
-                    });
-                    var mapUrl1 = "http://tiles.arcgis.com/tiles/4yjifSiIG17X0gW4/arcgis/rest/services/LA_Bus_OverlayMethodCache3/MapServer?token=7uuZ0yl9tPWGQogLPFyaMbwMKgkoKh1rpakzj4oIL7c_998D3uISBAegRsKQXi8Gu5btxBOIDuUabCg35cGD5TCH7Ag8hMLPcWBfg9JssjY0IxOPcDkKIt7YonWnguQfL_MyK77Jt74leNSqzHAs3g..";
-                    var mapUrl2 = "http://tiles.arcgis.com/tiles/4yjifSiIG17X0gW4/arcgis/rest/services/LA_Bus_OverlayMethod_StreetsTileTest/MapServer?token=7uuZ0yl9tPWGQogLPFyaMbwMKgkoKh1rpakzj4oIL7c_998D3uISBAegRsKQXi8Gu5btxBOIDuUabCg35cGD5TCH7Ag8hMLPcWBfg9JssjY0IxOPcDkKIt7YonWnguQfL_MyK77Jt74leNSqzHAs3g..";
-                    var maplayer1 = new ArcGISTiledMapServiceLayer(mapUrl1);
-                    var maplayer2 = new ArcGISTiledMapServiceLayer(mapUrl2);
-                    map.addLayer(maplayer2);
-                    map.addLayer(MSLayer);
-                    
-                     map.addLayer(maplayer1);
-                    console.log("MSLayer added");
-                    dojo.byId("inputUrl").style.backgroundColor = "#00ff00";
-                    dojo.byId("aggRend").style.visibility = "visible";
-                    dojo.byId("featureRend").style.visibility = "visible";
-                    dojo.byId("applyRenderer").style.visibility = "visible";
-                    dojo.byId("msSettings").style.visibility = "visible";
-                };
-                //#############################################################################################
-                //Renderer related functions
-                //#############################################################################################
-
-                function switchRenderer() {
-                    var JSON = createJSON();
-                    var layer = map.getLayer("TestMS"),
-                        drawingOptions = new LayerDrawingOptions(),
-                        layerDrawing = [];
-                    drawingOptions.renderer = new AggregationRenderer(JSON);
-                    //drawingOptions.transparency = 50;
-                    layerDrawing[0] = drawingOptions;
-                    layer.setLayerDrawingOptions(layerDrawing)
-                    layer.refresh()
-                }
-  
-                function createJSON() {
-                    var geoHashStyle = dojo.byId("geoHashStyle").value,
-                        minColor = hexToRgb(dojo.byId("minColor").value, parseFloat(dojo.byId("minColorA").value)),
-                        maxColor = hexToRgb(dojo.byId("maxColor").value, parseFloat(dojo.byId("maxColorA").value)),
-                        style = dojo.byId("style").value,
-                        Fstyle = dojo.byId("Fstyle").value,
-                        Fsize = parseFloat(dojo.byId("Fsize").value),
-                        Fcolor = hexToRgb(dojo.byId("Fcolor").value, parseFloat(dojo.byId("FcolorA").value)),
-                        Foutline = hexToRgb(dojo.byId("Foutline").value, parseFloat(dojo.byId("FoutlineA").value)),
-                        FoutlineW = parseFloat(dojo.byId("FoutlineW").value),
-                        featureThreshold = parseFloat(dojo.byId("featureThreshold").value),
-                        minBinSizeInPixels = parseFloat(dojo.byId("minBinSizeInPixels").value);
-
-                    //console.log(Fstyle, Fsize, Fcolor, Foutline, FoutlineW)
-
-                    var rendererJSON = {
-                        "type": "aggregation",
-                        "style": style,
-                        "featureThreshold": featureThreshold,
-                        "lodOffset": 0,
-                        "minBinSizeInPixels": minBinSizeInPixels,
-                        // "labels": {
-                        //     "color": [0, 0, 0, 255],
-                        //     "font": "Arial",
-                        //     "size": 12,
-                        //     "style": "PLAIN",
-                        //     "format": "#.##"
-                        // },
-                        "binRenderer": {
-                            "type": "Continuous",
-                            "minColor": minColor,
-                            "maxColor": maxColor
-                        },
-                        "geoHashStyle": {
-                            "style": geoHashStyle,
-                              // or flatHexagon or square or pointyTriangle or flatTriange
-                            "sr": "102100"
-                        },
-                        "featureRenderer": {
-                            "type": "simple",
-                            "symbol": {
-                                "type": "esriSMS",
-                                "style": Fstyle,
-                                "color": Fcolor,
-                                "size": Fsize,
-                                "angle": 0,
-                                "xoffset": 0,
-                                "yoffset": 0,
-                                "outline": {
-                                    "color": Foutline,
-                                    "width": FoutlineW
-                                }
-                            },
-                            "label": "",
-                            "description": ""
-                        }
-                    };
-                    console.log(rendererJSON);
-                    return rendererJSON;
-
-                };
-
-                function hexToRgb(hex, a) {
-                    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-                    var r = parseInt(result[1], 16),
-                        g = parseInt(result[2], 16),
-                        b = parseInt(result[3], 16);
-                    return [r, g, b, a];
-                }
-
-            });
-    </script>
+    </style>
 </head>
 
 <body class="calcite calcite-maps calcite-nav-top calcite-margin-all calcite-zoom-top-left calcite-layout-inline-left">
 
-  <!-- Navbar -->
+    <!-- Navbar -->
 
-  <nav class="navbar calcite-navbar navbar-fixed-top calcite-text-light calcite-bg-dark calcite-bgcolor-dark-purple">
-    <!-- Menu -->
-    <div class="dropdown calcite-dropdown calcite-bg-light calcite-text-dark" role="presentation">
-      <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
-        <div class="calcite-dropdown-toggle">
-          <span class="sr-only">Toggle dropdown menu</span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
+    <nav class="navbar calcite-navbar navbar-fixed-top calcite-text-light calcite-bg-dark calcite-bgcolor-dark-purple">
+        <!-- Menu -->
+        <div class="dropdown calcite-dropdown calcite-bg-light calcite-text-dark" role="presentation">
+            <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+                <div class="calcite-dropdown-toggle">
+                    <span class="sr-only">Toggle dropdown menu</span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a role="button" data-target="#panelInfo" aria-haspopup="true"><span class="glyphicon glyphicon-info-sign"></span> Info</a></li>
+                <li><a class="visible-xs" role="button" data-target="#panelSearch" aria-haspopup="true"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+                <li><a role="button" data-target="#panelBasemaps" aria-haspopup="true"><span class="glyphicon glyphicon-th-large"></span> Basemaps</a></li>
+                <li><a role="button" id="calciteToggleNavbar" aria-haspopup="true"><span class="glyphicon glyphicon-fullscreen"></span> Full Map</a></li>
+                <li><a role="button" data-target="#panelRenderer" aria-haspopup="true"><span class="glyphicon glyphicon-th-large"></span> Renderer </a></li>
+            </ul>
         </div>
-      </a>
-      <ul class="dropdown-menu">
-        <li><a role="button" data-target="#panelInfo" aria-haspopup="true"><span class="glyphicon glyphicon-info-sign"></span> Info</a></li>
-        <li><a class="visible-xs" role="button" data-target="#panelSearch" aria-haspopup="true"><span class="glyphicon glyphicon-search"></span> Search</a></li>
-        <li><a role="button" data-target="#panelBasemaps" aria-haspopup="true"><span class="glyphicon glyphicon-th-large"></span> Basemaps</a></li>
-        <li><a role="button" id="calciteToggleNavbar" aria-haspopup="true"><span class="glyphicon glyphicon-fullscreen"></span> Full Map</a></li>
-      </ul>
-    </div>
-    <!-- Title -->
-    <div class="calcite-title calcite-overflow-hidden">
-      <span class="calcite-title-main">Real- Time Cartography</span>
-      <span class="calcite-title-divider hidden-xs"></span>
-      <span class="calcite-title-sub hidden-xs">Los Angeles real- time bus transit system</span> 
-    </div>
-     <!-- Nav -->
-    <ul class="calcite-nav nav navbar-nav">                    
-      <li><div class="calcite-navbar-search hidden-xs"><div id="searchNavDiv"></div></div></li>
-    </ul>
- 
-  </nav><!--/.navbar -->
+        <!-- Title -->
+        <div class="calcite-title calcite-overflow-hidden">
+            <span class="calcite-title-main">Real- Time Cartography</span>
+            <span class="calcite-title-divider hidden-xs"></span>
+            <span class="calcite-title-sub hidden-xs">Los Angeles Bus Transit System</span>
+        </div>
+        <!-- Nav -->
+        <ul class="calcite-nav nav navbar-nav">
+            <li>
+                <div class="calcite-navbar-search hidden-xs">
+                    <div id="searchNavDiv"></div>
+                </div>
+            </li>
+        </ul>
 
-  <!-- Map Container  -->
+    </nav>
+    <!--/.navbar -->
 
-  <div class="calcite-map">
-    <div id="map" class="calcite-map-absolute"></div>
-    <div id="controls">
-        <b>MapService URL: </b>
-        <input type="text" id="inputUrl" value="https://geoeventsample3.esri.com:6443/arcgis/rest/services/Hosted/LABus/MapServer" style="width: 400px; margin-bottom: 5px" />
-        <input type="button" class="button" id="addMS" value="Add Service" />
-        <input type="button" class="button" id="applyRenderer" value="Apply Renderer" style="visibility:hidden;" />
-        <br>
-        <table id="msSettings" style="visibility:hidden; float: left;">
-            <th style="text-align: left;">MS Properties:</th>
-            <tr>
-                <td>Feature Threshold:</td>
-                <td>
-                    <input type="text" id="featureThreshold" value="100" style="width: 50px;" />
-                </td>
-            </tr>
-            <tr>
-                <td>min. Bin Size (in pixels):</td>
-                <td>
-                    <input type="text" id="minBinSizeInPixels" value="10" style="width: 50px;" />
-                </td>
-            </tr>
-        </table>
-        <table id="aggRend" style="visibility:hidden; float: left;">
-            <th style="text-align: left;">Aggregation Rendering:</th>
-            <tr>
-                <td>Style:</td>
-                <td>
-                    <select name="style" id="style">
-                        <option value="Grid">Grid</option>
-                        <option value="Oval">Oval</option>
+    <!-- Map Container  -->
+
+    <div class="calcite-map">
+        <div id="mapViewDiv" class="calcite-map-absolute"></div>
+    </div>
+    <!-- /.container -->
+
+    <!-- Panel -->
+
+    <div class="calcite-panels calcite-panels-right calcite-bg-light calcite-text-dark panel-group" role="tablist" aria-multiselectable="true">
+
+        <!-- Info Panel -->
+
+        <div id="panelInfo" class="panel collapse">
+            <div id="headingInfo" class="panel-heading" role="tab">
+                <div class="panel-title">
+                    <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseInfo" aria-expanded="true" aria-controls="collapseInfo"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><span class="panel-label">Info</span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelInfo"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div id="collapseInfo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInfo">
+                <div class="panel-body">
+                    <p>This a real- time cartography project showing bus transit</p>
+                    Content
+                    <li>real- time bus transit</li>
+                    <li>historic bus transit</li>
+                    <br>Team members
+                    <li>Adam Mollenkopf</li>
+                    <li>Jim Herries</li>
+                    <li>Thomas Paschke</li>
+                    <li>Jennifer Bell</li>
+                    <li>Morakot Pilouk</li>
+                    <li>Zihan Song</li>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Panel -->
+
+        <div id="panelSearch" class="panel collapse hidden-sm hidden-md hidden-lg">
+            <div id="headingSearch" class="panel-heading" role="tab">
+                <div class="panel-title">
+                    <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseSearch" aria-expanded="false" aria-controls="collapseSearch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span><span class="panel-label">Search</span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelSearch"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div id="collapseSearch" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSearch">
+                <div class="panel-body calcite-body-expander">
+                    <div id="searchPanelDiv"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Renderer Panel -->
+
+        <div id="panelRenderer" class="panel collapse">
+            <div id="headingRenderer" class="panel-heading" role="tab">
+                <div class="panel-title">
+                    <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseInfo" aria-expanded="true" aria-controls="collapseInfo"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><span class="panel-label">Renderer</span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelRenderer"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div id="rendererInfo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="rendererInfo">
+                <div class="panel-body">
+                    <table id="aggRenderingTable">
+                        <th style="text-align: left;" colspan="2">Aggregation Rendering:</th>
+                        <tr>
+                            <td>Style:</td>
+                            <td>
+                                <select name="style" id="style" style="width: 120px;">
+                                    <option value="Grid">Grid</option>
+                                    <option value="Oval">Oval</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>GeoHash Style:</td>
+                            <td>
+                                <select name="geoHashStyle" id="geoHashStyle" style="width: 120px;">
+                                <option value="pointyHexagon">Pointy Hexagon</option>
+                                    <option value="geohash">GeoHash</option>
+                                    <option value="square">Square</option>
+                                    <option value="flatHexagon">Flat Hexagon</option>
+                                    
+                                    <option value="flatTriangle">Flat Triangle</option>
+                                    <option value="pointyTriangle">Pointy Triangle</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>min. Bin Size (in pixels):</td>
+                            <td>
+                                <input type="text" id="minBinSizeInPixels" value="10" style="width: 50px;" />
+                            </td>
+                        </tr>
+                        <th style="text-align: left;" colspan="2">Bins:</th>
+                        <tr>
+                            <td>Min Color:</td>
+                            <td>
+                                <input type="color" value="#C0C0C0" style="width: 50px;" id="minColor">
+                                <input type="number" min="0" max="255" style="width: 50px;" id="minColorA" value="255" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Max Color:</td>
+                            <td>
+                                <input type="color" value="#f03b20" style="width: 50px;" id="maxColor" />
+                                <input type="number" min="0" max="255" style="width: 50px;" id="maxColorA" value="255" />
+                            </td>
+                        </tr>
+                    </table>
+                    <input type="button" class="button" id="applyRendererButton" value="Apply Renderer" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Basemaps Panel -->
+
+        <div id="panelBasemaps" class="panel collapse">
+            <div id="headingBasemaps" class="panel-heading" role="tab">
+                <div class="panel-title">
+                    <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseBasemaps" aria-expanded="false" aria-controls="collapseBasemaps"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span><span class="panel-label">Basemaps</span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelBasemaps"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div id="collapseBasemaps" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingBasemaps">
+                <div class="panel-body">
+                    <select id="selectBasemapPanel" class="form-control">
+                    <option value="dark-gray" data-vector="vector-canvas-dark">Dark Gray</option>
+                        <option value="streets" data-vector="vector-streets">Streets</option>
+                        <option value="satellite" data-vector="satellite">Satellite</option>
+                        <option value="hybrid" data-vector="hybrid">Hybrid</option>
+                        <option value="national-geographic" data-vector="national-geographic">National Geographic</option>
+                        <option value="topo" data-vector="vector-streets-relief">Topographic</option>
+                        <option value="gray" data-vector="vector-canvas-light">Gray</option>
+                        
+                        <option value="streets" data-vector="vector-streets-mobile">Streets Mobile</option>
                     </select>
-                </td>
-            </tr>
-            <tr>
-                <td>GeoHash Style:</td>
-                <td>
-                    <select name="geoHashStyle" id="geoHashStyle">
-                        <option value="geohash">GeoHash</option>
-                        <option value="square">Square</option>
-                        <option value="flatHexagon">Flat Hexagon</option>
-                        <option value="pointyHexagon">Pointy Hexagon</option>
-                        <option value="flatTriangle">Flat Triangle</option>
-                        <option value="pointyTriangle">Pointy Triangle</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>min. Color:</td>
-                <td>
-                    <input type="color" value="#ffeda0" id="minColor"> Opac.
-                    <input type="text" id="minColorA" value="50" style="width: 35px;" />
-                </td>
-            </tr>
-            <tr>
-                <td>max. Color:</td>
-                <td>
-                    <input type="color" value="#f03b20" id="maxColor"> Opac.
-                    <input type="text" id="maxColorA" value="255" style="width: 35px;" />
-                </td>
-            </tr>
-        </table>
-        <table id="featureRend" style="visibility:hidden; float: left;">
-            <th style="text-align: left;">Feature Rendering:</th>
-            <tr>
-                <td>Style:</td>
-                <td>
-                    <select name="Fstyle" id="Fstyle">
-                        <option value="esriSMScircle">Circle</option>
-                        <option value="esriSMSCros">Cross</option>
-                        <option value="esriSMSDiamond">Diamond</option>
-                        <option value="esriSMSSquare">Square</option>
-                        <option value="esriSMSX ">X</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Size:</td>
-                <td>
-                    <input type="text" id="Fsize" value="12" style="width: 50px;" />
-                </td>
-            </tr>
-            <tr>
-                <td>Color:</td>
-                <td>
-                    <input type="color" value="#9ecae1" id="Fcolor"> Opac.
-                    <input type="text" id="FcolorA" value="150" style="width: 35px;" />
-                </td>
-            </tr>
-            <tr>
-                <td>Outline Color:</td>
-                <td>
-                    <input type="color" id="Foutline"> Opac.
-                    <input type="text" id="FoutlineA" value="255" style="width: 35px;" />
-                </td>
-            </tr>
-            <tr>
-                <td>Outline Width:</td>
-                <td>
-                    <input type="text" id="FoutlineW" value="1" style="width: 50px;" />
-                </td>
-            </tr>
-        </table>
+                </div>
+            </div>
+        </div>
+
     </div>
-  </div><!-- /.container -->
+    <!-- /.calcite-panels -->
 
-  <!-- Panel -->
+    <script type="text/javascript">
+        var dojoConfig = {
+            packages: [{
+                    name: "bootstrap",
+                    //location: "https://esri.github.io/calcite-maps/dist/js/dojo-bootstrap"
+                    location: location.pathname.replace(/\/[^/]+$/, "") + "./../../dist/vendor/dojo-bootstrap"
+        },
+                {
+                    name: "calcite-maps",
+                    //location: "https://esri.github.io/calcite-maps/dist/js/dojo"
+                    location: location.pathname.replace(/\/[^/]+$/, "") + "./../../dist/js/dojo"
+        }, {
+                    name: "myRenderer",
+                    //location: "http://localhost/calcite-maps/samples/arcgis-3.x/js"
+                    location: location.pathname.replace(/\/[^/]+$/, "") + "/js"
+      }]
+        };
+    </script>
 
-  <div class="calcite-panels calcite-panels-right calcite-bg-light calcite-text-dark panel-group" role="tablist" aria-multiselectable="true">
-          
-    <!-- Info Panel -->
-  
-    <div id="panelInfo" class="panel collapse">
-      <div id="headingInfo" class="panel-heading" role="tab">
-        <div class="panel-title">
-          <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseInfo"  aria-expanded="true" aria-controls="collapseInfo"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><span class="panel-label">Info</span></a> 
-          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelInfo"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>  
-        </div>
-      </div>
-      <div id="collapseInfo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInfo">
-        <div class="panel-body">
-          <p>The main styles used in this app are:</p>
-          Body
-          <li>calcite-nav-top</li>
-          <li>calcite-layout-inline-left</li>
-          <br>
-          Nav
-          <li>calcite-bgcolor-dark-purple</li>
-          <li>calcite-text-light</li>
-          <br>
-          Panels
-          <li>calcite-panels-right</li>
-        </div>
-      </div>
-    </div>
-  
-    <!-- Search Panel -->
+    <!-- ArcGIS JS 3.x -->
+    <script src="https://js.arcgis.com/3.16/"></script>
 
-    <div id="panelSearch" class="panel collapse hidden-sm hidden-md hidden-lg">
-      <div id="headingSearch" class="panel-heading" role="tab">
-        <div class="panel-title">
-          <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseSearch"  aria-expanded="false" aria-controls="collapseSearch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span><span class="panel-label">Search</span></a> 
-          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelSearch"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>        
-        </div>
-      </div>
-      <div id="collapseSearch" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSearch">
-        <div class="panel-body calcite-body-expander"> 
-          <div id="searchPanelDiv"></div>
-        </div>
-      </div>
-    </div>
+    <script>
+        var app;
 
-    <!-- Basemaps Panel -->
-    
-    <div id="panelBasemaps" class="panel collapse"> 
-      <div id="headingBasemaps" class="panel-heading" role="tab">
-        <div class="panel-title">
-          <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseBasemaps" aria-expanded="false"   aria-controls="collapseBasemaps"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span><span class="panel-label">Basemaps</span></a> 
-          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelBasemaps"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>  
-        </div>
-      </div>
-      <div id="collapseBasemaps" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingBasemaps">
-        <div class="panel-body">
-          <select id="selectBasemapPanel" class="form-control">
-            <option value="streets" data-vector="vector-streets">Streets</option>
-            <option value="satellite" data-vector="satellite">Satellite</option>
-            <option value="hybrid" data-vector="hybrid">Hybrid</option>
-            <option value="national-geographic" data-vector="national-geographic">National Geographic</option>
-            <option value="topo" data-vector="vector-streets-relief">Topographic</option>
-            <option value="gray" data-vector="vector-canvas-light">Gray</option>
-            <option value="dark-gray" data-vector="vector-canvas-dark">Dark Gray</option>
-            <option value="osm" data-vector="osm">Open Street Map</option>
-            <option value="dark-gray" data-vector="vector-streets-night">Streets Night</option>
-            <option value="streets" data-vector="vector-streets-mobile">Streets Mobile</option>
-          </select>
-        </div>
-      </div>
-    </div>
+        require([
+          // ArcGIS
+          "esri/map",
+          "esri/dijit/Popup", "esri/dijit/PopupTemplate", "esri/InfoTemplate",
+          "esri/dijit/Search",
+          "esri/renderers/SimpleRenderer",
+          "esri/renderers/TemporalRenderer",
+          "esri/renderers/TimeClassBreaksAger",
+          "esri/symbols/SimpleMarkerSymbol",
+          "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol", "esri/Color",
+          "esri/layers/ArcGISDynamicMapServiceLayer",
+          "esri/layers/ArcGISTiledMapServiceLayer",
+          "esri/layers/StreamLayer",
+          "esri/layers/LayerDrawingOptions",
+          "dojo/query",
 
-  </div> <!-- /.calcite-panels -->
+          "myRenderer/aggregationRenderer",
 
-    
+          // Calcite Maps
+          "calcite-maps/calcitemaps-v0.2",
 
-  
-    
+          "dojo/dom",
+          "dojo/on",
+
+          // Bootstrap
+          "bootstrap/Collapse",
+          "bootstrap/Dropdown",
+          "bootstrap/Tab",
+
+          "dojo/domReady!"
+        ], function (Map, Popup, PopupTemplate,InfoTemplate,Search,SimpleRenderer, TemporalRenderer,TimeClassBreaksAger,SimpleMarkerSymbol,SimpleFillSymbol, SimpleLineSymbol, Color, ArcGISDynamicMapServiceLayer,ArcGISTiledMapServiceLayer,StreamLayer, LayerDrawingOptions, query, AggregationRenderer, CalciteMaps, dom, on) {
+
+            // App 
+            app = {
+                map: null,
+                basemap: "dark-gray",
+               center: [-118.24, 34.05],
+      zoom: 10,
+                initialExtent: null,
+                searchWidgetNav: null,
+                searchWidgetPanel: null
+            }
+
+            // Map 
+            app.map = new Map("mapViewDiv", {
+                basemap: app.basemap,
+                center: app.center,
+                zoom: app.zoom
+            });
+
+            app.map.on("load", function () {
+                app.initialExtent = app.map.extent;
+            })
+            on(dom.byId("applyRendererButton"), "click", switchRenderer);
+
+            //#############################################################################################
+            //Add Layers
+            //#############################################################################################
+
+            var symbol1 = new SimpleMarkerSymbol(
+          SimpleMarkerSymbol.STYLE_CIRCLE, 
+          12, 
+          new SimpleLineSymbol(
+            SimpleLineSymbol.STYLE_NULL, 
+            new Color([192, 192, 192, 0.9]), 
+            1
+          ),
+          new Color([60, 60, 60])
+        );
+             var symbol2 = new SimpleMarkerSymbol(
+          SimpleMarkerSymbol.STYLE_CIRCLE, 
+          12, 
+          new SimpleLineSymbol(
+            SimpleLineSymbol.STYLE_NULL, 
+            new Color([192, 192, 192, 0.9]), 
+            1
+          ),
+          new Color([255, 255, 255,0.8])
+        );
+             var sls = new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH,
+        new Color([255, 0, 0]), 2);
+      var trackRenderer = new SimpleRenderer(sls);
+            var observationRenderer = new SimpleRenderer(symbol1);
+            var latestobservationRenderer = new SimpleRenderer(symbol2);
+            var infos = [
+        {
+          minAge: 0,
+          maxAge: 5,
+          color: new Color([255, 0, 0])
+        }, {
+          minAge: 5,
+          maxAge: 10,
+          color: new Color([150, 153, 0])
+        }, {
+          minAge: 10,
+          maxAge: 15,
+          color: new Color([255, 204, 0])
+        }, {
+          minAge: 15,
+          maxAge: Infinity,
+          color: new Color([0, 0, 0, 0])
+        }
+      ];
+      var ager = new TimeClassBreaksAger(infos, TimeClassBreaksAger.UNIT_MINUTES);
+var temporalRenderer = new TemporalRenderer(observationRenderer, latestobservationRenderer, trackRenderer, ager);
+console.log(temporalRenderer);
+            var svcUrl = "https://geoeventsample3.esri.com:6443/arcgis/rest/services/LABus/StreamServer";
+ var options = {
+                maximumTrackPoints: 3
+            }
+            var streamLayer = new StreamLayer(svcUrl, options); 
+                
+                streamLayer.setRenderer(temporalRenderer);
+                streamLayer.setMinScale(70000);
+                var template = new InfoTemplate();
+
+    template.setTitle("L.A. bus ${run_id}");
+
+   template.setContent("Route ${route_id} updates at ${received_time}");
+
+    streamLayer.setInfoTemplate(template);
+             var mapUrl1 = "http://tiles.arcgis.com/tiles/4yjifSiIG17X0gW4/arcgis/rest/services/LA_Bus_OverlayMethodCache3/MapServer?token=7uuZ0yl9tPWGQogLPFyaMbwMKgkoKh1rpakzj4oIL7c_998D3uISBAegRsKQXi8Gu5btxBOIDuUabCg35cGD5TCH7Ag8hMLPcWBfg9JssjY0IxOPcDkKIt7YonWnguQfL_MyK77Jt74leNSqzHAs3g..";
+                    var mapUrl2 = "http://tiles.arcgis.com/tiles/4yjifSiIG17X0gW4/arcgis/rest/services/LA_Bus_OverlayMethod_StreetsTileTest/MapServer?token=7uuZ0yl9tPWGQogLPFyaMbwMKgkoKh1rpakzj4oIL7c_998D3uISBAegRsKQXi8Gu5btxBOIDuUabCg35cGD5TCH7Ag8hMLPcWBfg9JssjY0IxOPcDkKIt7YonWnguQfL_MyK77Jt74leNSqzHAs3g..";
+                    var maplayer1 = new ArcGISTiledMapServiceLayer(mapUrl1);
+                    var maplayer2 = new ArcGISTiledMapServiceLayer(mapUrl2);
+            var url = "http://ec2-52-87-240-107.compute-1.amazonaws.com/arcgis/rest/services/Hosted/BUS-DATA-LA/MapServer",
+                options = {
+                    id: "AggregationMS",
+                    showAttribution: true,
+                    refreshInterval: 0.03333
+                },
+                msLayer = new ArcGISDynamicMapServiceLayer(url, options);
+                // msLayer.setMaxScale(10000);
+                maplayer2.setMaxScale(10000);
+                app.map.addLayer(maplayer2);
+            app.map.addLayer(msLayer);
+app.map.addLayer(maplayer1);
+app.map.addLayer(streamLayer);
+            //#############################################################################################
+            //Renderer related functions
+            //#############################################################################################
+
+            function switchRenderer() {
+                var layer = app.map.getLayer("AggregationMS");
+                applyRenderer(layer);
+                layer.refresh();
+            }
+
+            function applyRenderer(dynamicMapServiceLayer) {
+                var json = createJSON();
+                var aggregationRenderer = new AggregationRenderer(json);
+                var drawingOptions = new LayerDrawingOptions();
+                drawingOptions.renderer = aggregationRenderer;
+                var layerDrawingOptions = [];
+                layerDrawingOptions[0] = drawingOptions;
+                dynamicMapServiceLayer.setLayerDrawingOptions(layerDrawingOptions);
+            }
+
+
+            function createJSON() {
+                var style = dojo.byId("style").value;
+                var geoHashStyle = dojo.byId("geoHashStyle").value
+                var minColor = hexToRgb(dojo.byId("minColor").value, parseFloat(dojo.byId("minColorA").value));
+                var maxColor = hexToRgb(dojo.byId("maxColor").value, parseFloat(dojo.byId("maxColorA").value));
+                var minBinSizeInPixels = parseInt(dojo.byId("minBinSizeInPixels").value);
+                console.log(dojo.byId("minBinSizeInPixels").value)
+
+                var rendererJSON = {
+                    "type": "aggregation",
+                    "style": style,
+                    "minBinSizeInPixels": minBinSizeInPixels,
+                    "binRenderer": {
+                        "type": "Continuous",
+                        "minColor": minColor,
+                        "maxColor": maxColor,
+                    },
+                    "geoHashStyle": {
+                        "style": geoHashStyle,
+                    }
+                };
+                console.log(rendererJSON);
+                return rendererJSON;
+            }
+
+            function hexToRgb(hex, a) {
+                var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                var r = parseInt(result[1], 16);
+                var g = parseInt(result[2], 16);
+                var b = parseInt(result[3], 16);
+                return [r, g, b, a];
+            }
+
+
+
+            // Search
+            app.searchDivNav = createSearchWidget("searchNavDiv");
+            app.searchWidgetPanel = createSearchWidget("searchPanelDiv");
+
+            function createSearchWidget(parentId) {
+                var search = new Search({
+                    map: app.map,
+                    enableHighlight: false
+                }, parentId);
+                search.startup();
+                return search;
+            }
+
+            // Basemaps
+            query("#selectBasemapPanel").on("change", function (e) {
+                app.map.setBasemap(e.target.options[e.target.selectedIndex].value);
+            });
+
+            // Home
+            query(".calcite-navbar .navbar-brand").on("click", function (e) {
+                app.map.setExtent(app.initialExtent);
+            })
+
+        });
+    </script>
 
 </body>
-</html>
 
+</html>
