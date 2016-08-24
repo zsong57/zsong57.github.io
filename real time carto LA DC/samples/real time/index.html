@@ -8,7 +8,7 @@
     <meta name="description" content="Calcite Maps Demo - ArcGIS">
     <meta name="author" content="">
     <link rel="icon" href="http://www.freeiconspng.com/uploads/hello-kitty-icon-12.png">
-    <title>Los Angeles Real- Time Bus</title>
+    <title>D.C. Real- Time Bus</title>
 
     <!-- Calcite Bootstrap -->
     <link rel="stylesheet" href="../../dist/css/calcite-bootstrap.min-v0.2.css">
@@ -58,7 +58,7 @@
         <div class="calcite-title calcite-overflow-hidden">
             <span class="calcite-title-main">Real- Time Cartography</span>
             <span class="calcite-title-divider hidden-xs"></span>
-            <span class="calcite-title-sub hidden-xs">Los Angeles Bus Transit System</span>
+            <span class="calcite-title-sub hidden-xs">Washington D.C. Bus Transit System</span>
         </div>
         <!-- Nav -->
         <ul class="calcite-nav nav navbar-nav">
@@ -279,7 +279,7 @@
             app = {
                 map: null,
                 basemap: "dark-gray",
-               center: [-118.24, 34.05],
+               center: [-77.0369, 38.9072],
       zoom: 10,
                 initialExtent: null,
                 searchWidgetNav: null,
@@ -349,7 +349,7 @@
       var ager = new TimeClassBreaksAger(infos, TimeClassBreaksAger.UNIT_MINUTES);
 var temporalRenderer = new TemporalRenderer(observationRenderer, latestobservationRenderer, trackRenderer, ager);
 console.log(temporalRenderer);
-            var svcUrl = "https://geoeventsample3.esri.com:6443/arcgis/rest/services/LABus/StreamServer";
+            var svcUrl = "https://geoeventsample3.esri.com:6443/arcgis/rest/services/WashingtonMetroBuses/StreamServer";
  var options = {
                 maximumTrackPoints: 3
             }
@@ -359,16 +359,16 @@ console.log(temporalRenderer);
                 streamLayer.setMinScale(70000);
                 var template = new InfoTemplate();
 
-    template.setTitle("L.A. bus ${run_id}");
+    template.setTitle("D.C. bus ${VehicleID}");
 
-   template.setContent("Route ${route_id} updates at ${received_time}");
+   template.setContent("Route ${RouteID} updates at ${TripStartTime}");
 
     streamLayer.setInfoTemplate(template);
-             var mapUrl1 = "http://tiles.arcgis.com/tiles/4yjifSiIG17X0gW4/arcgis/rest/services/LA_Bus_OverlayMethodCache3/MapServer?token=7uuZ0yl9tPWGQogLPFyaMbwMKgkoKh1rpakzj4oIL7c_998D3uISBAegRsKQXi8Gu5btxBOIDuUabCg35cGD5TCH7Ag8hMLPcWBfg9JssjY0IxOPcDkKIt7YonWnguQfL_MyK77Jt74leNSqzHAs3g..";
+             var mapUrl1 = "http://tiles.arcgis.com/tiles/4yjifSiIG17X0gW4/arcgis/rest/services/DC_Mask/MapServer";
                     var mapUrl2 = "http://tiles.arcgis.com/tiles/4yjifSiIG17X0gW4/arcgis/rest/services/LA_Bus_OverlayMethod_StreetsTileTest/MapServer?token=7uuZ0yl9tPWGQogLPFyaMbwMKgkoKh1rpakzj4oIL7c_998D3uISBAegRsKQXi8Gu5btxBOIDuUabCg35cGD5TCH7Ag8hMLPcWBfg9JssjY0IxOPcDkKIt7YonWnguQfL_MyK77Jt74leNSqzHAs3g..";
                     var maplayer1 = new ArcGISTiledMapServiceLayer(mapUrl1);
                     var maplayer2 = new ArcGISTiledMapServiceLayer(mapUrl2);
-            var url = "http://ec2-52-87-240-107.compute-1.amazonaws.com/arcgis/rest/services/Hosted/BUS-DATA-LA/MapServer",
+            var url = "http://ec2-52-87-240-107.compute-1.amazonaws.com/arcgis/rest/services/Hosted/BUS-DATA-DC/MapServer",
                 options = {
                     id: "AggregationMS",
                     showAttribution: true,
@@ -376,8 +376,8 @@ console.log(temporalRenderer);
                 },
                 msLayer = new ArcGISDynamicMapServiceLayer(url, options);
                 // msLayer.setMaxScale(10000);
-                maplayer2.setMaxScale(10000);
-                app.map.addLayer(maplayer2);
+               
+               
             app.map.addLayer(msLayer);
 app.map.addLayer(maplayer1);
 app.map.addLayer(streamLayer);
