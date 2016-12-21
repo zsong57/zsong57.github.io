@@ -1,0 +1,190 @@
+/*!
+ * Start Bootstrap - Scrolling Nav (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+@media(min-width:767px) {
+    .navbar {
+        padding: 20px 0;
+        -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        transition: background .5s ease-in-out,padding .5s ease-in-out;
+        background-color: rgba(255,255,255,0.92);
+       font-family: 'Playfair Display', serif;
+        font-size: 18px;
+
+    }
+
+    .top-nav-collapse {
+        padding: 0;
+      font-family: 'Playfair Display', serif;
+    }
+}
+.navbar-brand, .navbar-collapse
+{font-family: 'Playfair Display', serif;}
+
+/* Demo Sections - You can use these as guides or delete them - the scroller will work with any sort of height, fixed, undefined, or percentage based.
+The padding is very important to make sure the scrollspy picks up the right area when scrolled to. Adjust the margin and padding of sections and children 
+of those sections to manage the look and feel of the site. */
+.col-lg-3
+{padding-left: 30px;}
+.intro-section {
+    height: 100%;
+    padding-top: 150px;
+    text-align: center;
+      background-image: url('../img/heading.jpg');
+}
+.prolo-section
+{padding-top: 100px;
+    /*text-align: center;*/
+    background: #F7F8F8;}
+
+.current-section {
+  
+    padding-top: 35px;
+    /*text-align: center;*/
+    background: #F7F8F8;
+}
+
+.why-section {
+    
+  padding-top: 35px;
+   
+    background: #F7F8F8;
+}
+
+.solution-section {
+   
+    padding-top: 35px;
+   
+    background: #F7F8F8;
+}
+.end-section
+{padding-top: 35px;
+   
+    background: #F7F8F8;}
+
+
+
+.btn-primary {
+  font-family: 'Playfair Display', serif;
+  color: white;
+  background-color: rgba(30,30,30,0.7);
+  border-color: rgba(30,30,30,0.2);
+  -webkit-transition: all 0.35s;
+  -moz-transition: all 0.35s;
+  transition: all 0.35s;
+  margin-top: 30px;
+}
+.btn-primary:hover,.btn-primary.focus:hover
+{background-color: rgba(150,150,150,0.5);
+border-color: rgba(100,100,100,0.3);}
+.btn-primary:focus
+{ background-color: rgba(30,30,30,0.7);
+  border-color: rgba(30,30,30,0.2);}
+
+.homeheading
+{color:rgb(255,255,255);
+font-family: 'Playfair Display', serif;
+font-size:66px;
+ font-weight: 400;
+  text-transform: uppercase;}
+
+.header-content p
+  {color:white;
+font-family: 'Playfair Display', serif;
+font-size:23px;
+}
+
+p1
+{color:white;
+font-family: Garamond;
+font-size:15px;
+font-weight: 500;
+}
+
+h1
+{font-family: Garamond;}
+
+h3{font-family: Garamond;
+  text-align: center;
+}
+
+
+h4{font-family: Garamond;
+  text-align: center;
+  color:#383838; 
+}
+h5{font-family: Garamond;
+  color:#383838;
+font-size: 18px;}
+p.name{color:white;
+font-family: 'Playfair Display', serif;
+font-size:18px;}
+p
+{font-family: Garamond;
+font-size: 22px;}
+
+hr.hrstyle2 {
+  border-color: #B5B5B5; 
+  max-width: 180px;
+}
+hr.hrstyle4 {
+  border-color: #000000; 
+  max-width: 100px;
+  border-width: 1px;
+
+}
+hr.hrstyle3 {
+  border-color: #B5B5B5; 
+  max-width: 800px;
+  
+}
+hr.hrstyle1 { 
+ 
+  /*border-color:  */
+  height: 10px;
+  border:0;
+  box-shadow: 0 10px 10px -10px rgb(255,255,255) inset;
+   max-width: 800px;
+} 
+
+.lastphoto
+{opacity: 0.9;
+margin-top: 40px;}
+.section-heading
+{font-family: Garamond;
+ }
+  
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote:after{ content: no-close-quote; }
+
+#myImg:hover {opacity: 0.7;}
+.rent {margin-left: 0px}
+

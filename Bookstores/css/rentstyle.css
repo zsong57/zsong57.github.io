@@ -1,0 +1,50 @@
+
+.countries2 {
+ stroke: #F7F8F8;
+    stroke-width: 0.3px;
+    stroke-linecap: round;
+}
+
+
+#infoPanel2 {
+     position: absolute;
+     left: 80%;
+     bottom:100%;
+  
+}
+
+#mapcontainer2
+{opacity: 0.95;}
+
+.infolabel2 {
+    position: absolute;
+   
+    right:-20px;
+    min-height: 45px;
+    width: 300px;
+    color: #4d4543;
+    font-size:18px;
+    background-color: rgba(180,183,175,0.7);
+
+    padding: 5px 10px;
+    font-family: Gill Sans MT;
+    border-radius: 2px;
+    box-shadow: 2px 2px 4px #999;
+    line-height: 1em;
+}
+.legendTotal {
+  position: relative;
+  left: 0px;
+  top: 10px;
+  font-family: Gill Sans MT;
+  font-size:13px;
+  color: #8C8C8C;
+}
+#legend2
+{
+  position: relative;
+  left: 20%;
+  top: -50px;
+  font-family: Garamond;
+  color: #8C8C8C;
+}
