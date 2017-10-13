@@ -1,0 +1,109 @@
+@media(min-width:767px) {
+    .navbar {
+        padding: 20px 0;
+        -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        transition: background .5s ease-in-out,padding .5s ease-in-out;
+        background-color: rgba(255,255,255,0.92);
+       font-family: 'Playfair Display', serif;
+        font-size: 18px;
+
+    }
+
+    .top-nav-collapse {
+        padding: 0;
+      font-family: 'Playfair Display', serif;
+    }
+}
+.navbar-brand, .navbar-collapse
+{font-family: 'Playfair Display', serif;}
+
+
+
+
+.homeheading
+{color:rgb(255,255,255);
+font-family: 'Playfair Display', serif;
+font-size:66px;
+ font-weight: 400;
+  text-transform: uppercase;}
+
+
+
+
+.btn-primary {
+  font-family: 'Playfair Display', serif;
+  color: white;
+  background-color: rgba(30,30,30,0.7);
+  border-color: rgba(30,30,30,0.2);
+  -webkit-transition: all 0.35s;
+  -moz-transition: all 0.35s;
+  transition: all 0.35s;
+  margin-top: 30px;
+}
+.btn-primary:hover,.btn-primary.focus:hover
+{background-color: rgba(150,150,150,0.5);
+border-color: rgba(100,100,100,0.3);}
+.btn-primary:focus
+{ background-color: rgba(30,30,30,0.7);
+  border-color: rgba(30,30,30,0.2);}
+
+  h1
+{font-family: Garamond;}
+
+hr.hrstyle2 {
+  border-color: #B5B5B5; 
+  max-width: 180px;
+}
+hr.hrstyle4 {
+  border-color: #000000; 
+  max-width: 100px;
+  border-width: 1px;
+
+}
+hr.hrstyle3 {
+  border-color: #B5B5B5; 
+  max-width: 800px;
+  
+}
+hr.hrstyle1 { 
+ 
+  /*border-color:  */
+  height: 30px;
+  border:0;
+  box-shadow: 0 10px 10px -10px rgb(255,255,255) inset;
+   max-width: 800px;
+}
+
+.About-section {
+    
+  padding-top: 35px;
+   
+    background: #F7F8F8;  
+}
+
+p
+{font-family: Garamond;
+font-size: 27px;
+color:black;}
+
+.section-heading
+{font-family: Garamond;
+	color:black;
+	font-weight: 700;
+	font-size: 28px;
+ }
+
+.caption
+{font-size: 20px;
+	text-align: center;
+	color:#4E4E4E;
+}
+
+.name
+{font-size: 20px;
+	text-align: center;
+	color:#4E4E4E;
+}
+p.pquote
+{text-align: center;}
